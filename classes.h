@@ -117,8 +117,8 @@ void noh::leitura( destiny *linhas, ifstream& arquivo_instancia){
 					arquivo_instancia >> dem[i];
 					if(dem[i] > linhas->capacity){
 						
-						cout << "O vertice de id igual a " << id << " possui capacidade superior ao esperado!" << endl;
-						cout << "Capacidade maxima esperada: " << linhas->capacity << endl;
+						cout << "idd igual a " << id << "maxima esperada: " << linhas->capacity << endl;
+
 						cout << "Capacidade do vertice encontrada: " << dem << endl;
 					}
 					break;
@@ -131,9 +131,8 @@ void noh::leitura( destiny *linhas, ifstream& arquivo_instancia){
 					arquivo_instancia >> ltw[i];
 					if(ltw[i] > linhas->route_time){
 						
-						cout << "O vertice de id igual a " << id << " possui a janela de tempo superior ao esperado!" << endl;
-						cout << "Janela de tempo maxima esperada: " << linhas->route_time << endl;
-						cout << "Janela de tempo maxima do vertice encontrada: " << ltw << endl;
+						cout << "id igual a " << id << endl << 
+					 "maxima do vertice encontrada: " << ltw << endl;
 					}
 
 					break;
