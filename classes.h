@@ -163,79 +163,36 @@ class automovel{
 		int qtd_veiculos;
 		
 	public:
-		automovel(ifstream& arq_solucao);
 		void leitura_rota(ifstream& arq_solucao, destiny *linhas);
+		automovel(ifstream& arq_solucao);
 
-		void restringimento01(ifstream& arq_solucao, destiny *linhas, noh *nohs);
 };
 
-// Construtor de "automovel"
 automovel::automovel(ifstream& arq_solucao){
 	
-	// leitura da linhas VEICULOS
+
 	string texto;
-	arq_solucao >> texto;
-	
-	// leitura da quantidade de veiculos
-	arq_solucao >> qtd_veiculos;
-	
-	// leitura da linhas ROTAS
 	arq_solucao >> texto;
 	
 	id = new int[qtd_veiculos];
 	rota = new vector<int>[qtd_veiculos];
+	arq_solucao >> qtd_veiculos;
+	
+	arq_solucao >> texto;
+	
 }
 
 
-// Funcao para leitura da rota de um veiculo
 void automovel::leitura_rota(ifstream& arq_solucao, destiny *linhas){
 	
-	int num_atual;
-	
-	// leitura da rota do veiculo atual
+	int atual;
+
 	for(int i = 0; i < qtd_veiculos; i++){
 		
 		for(int j = 0; j < linhas->size + 1; j++){
 			
-			arq_solucao >> num_atual;
-			rota[i].push_back(num_atual);
-		}
-	}
-}
-
-void automovel::restringimento01(ifstream& arq_solucao, destiny *linhas, noh *nohs){
-	
-	int num_atual;
-	
-	for(int i = 0; i < qtd_veiculos; i++){
-		
-		int pos = 0;
-		
-		for(auto it = rota[i].begin(); it != rota[i].end(); it++, pos++){
-			
-			num_atual = *it;
-			
-			// num_atual eh ponto de entrega
-			if(nohs->dem[num_atual] < 0){
-				
-				// ponto de coleta esperado
-				int aux_p = num_atual - ((linhas->size - 1) / 2);
-				
-				// caso o ponto i seja encontrado antes de j, o while é quebrado
-				int k = 0;
-				while(k < pos){
-					
-					if(rota[i][k] == aux_p)
-						break;
-						
-					k++;
-				}
-				
-				// caso k percorra ate pos, quer dizer que o ponto j apareceu depois de i
-				if(k == pos)
-					cout << "A rota do veiculo " << i + 1 << " possui o vertice de entrega " << num_atual << " que foi visitado antes do seu vertice de coleta!" << endl;
-				
-			}
+			arq_solucao >> atual;
+			rota[i].push_back(atual);
 		}
 	}
 }
