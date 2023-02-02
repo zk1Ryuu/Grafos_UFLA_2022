@@ -22,7 +22,7 @@ void noh::precedencia(destiny *linhas){
 		if(dem[i] == 0){
 				
 				cout << "Erro !"
-                    << "p e d encontrados: " << p[i] << " " << d[i] << endl;
+                    << "p e d encontrados: " << p[i] << " " << d[i];
 		}
 		
 		if(dem[i] > 0){
@@ -51,7 +51,7 @@ void noh::precedencia(destiny *linhas){
 				if(p[i] != p01){
 					
 					cout << "id igual a " << id[i] << " possui um erro de prioridade!" << endl
-                    <<  "esperado: " << p01 << endl;
+                    <<  "esperado: " << p01 << endl
 					<< "encontrado: " << p[i];
 				}
 			}
