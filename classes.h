@@ -5,20 +5,21 @@
 
 using namespace std;
 
+//CLasse do destino do automovel
 class destiny{
 	
 	private:
-		int size;
-		int route_time;
 		int time_widow;
 		int capacity;
+		int size;
+		int route_time;
 
-		string name;
-		string location;
-		string comment;
 		string type;
 		string distribuition;
 		string depot;
+		string name;
+		string location;
+		string comment;
 
 		
 	public:
@@ -40,7 +41,7 @@ destiny::destiny(){
 	
 }
 
-
+//Classe do nó do grafo
 class noh{
 	
 	friend class automovel;
@@ -60,10 +61,10 @@ class noh{
 	public:
 		noh(destiny *linhas);
 		void leitura(destiny *linhas, ifstream& arquivo_instancia);
-		void precedencia(destiny *linhas);
+		void priodade(destiny *linhas);
 		void destrutor(destiny *linhas);
 		void distancia_dos_nohs(ifstream& arquivo_instancia, destiny *linhas);
-		void verificar_restricoes_solucao_aleatoria(ifstream& arq_solucao, destiny *linhas);
+		void verificar_restricoes_solucao_aleatoria(ifstream& arquivo_instancia, destiny *linhas);
 };
 
 // Construtor de "noh"
@@ -91,6 +92,7 @@ noh::noh(destiny *linhas){
 
 }
 
+//Leitura das variaveis pedidos no enunciado
 void noh::leitura( destiny *linhas, ifstream& arquivo_instancia){
 	
 	for(int i = 0; i < linhas->size; i++){
@@ -154,6 +156,7 @@ void noh::leitura( destiny *linhas, ifstream& arquivo_instancia){
 	}
 }
 
+//Classe do automovel
 class automovel{
 	
 	private:
@@ -162,27 +165,14 @@ class automovel{
 		int qtd_veiculos;
 		
 	public:
-		void leitura_rota(ifstream& arq_solucao, destiny *linhas);
-		automovel(ifstream& arq_solucao);
+		void leitura_rota(ifstream& arquivo_instancia, destiny *linhas);
+		automovel(ifstream& arquivo_instancia);
+		void restricao(ifstream& arquivo_instancia, destiny *linhas, noh *nohs);
 
 };
 
-automovel::automovel(ifstream& arq_solucao){
-	
-
-	string texto;
-	arq_solucao >> texto;
-	
-	id = new int[qtd_veiculos];
-	rota = new vector<int>[qtd_veiculos];
-	arq_solucao >> qtd_veiculos;
-	
-	arq_solucao >> texto;
-	
-}
-
-
-void automovel::leitura_rota(ifstream& arq_solucao, destiny *linhas){
+//Leitura da rota que o automovel fará
+void automovel::leitura_rota(ifstream& arquivo_instancia, destiny *linhas){
 	
 	int atual;
 
@@ -190,8 +180,22 @@ void automovel::leitura_rota(ifstream& arq_solucao, destiny *linhas){
 		
 		for(int j = 0; j < linhas->size + 1; j++){
 			
-			arq_solucao >> atual;
+			arquivo_instancia >> atual;
 			rota[i].push_back(atual);
 		}
 	}
+}
+
+automovel::automovel(ifstream& arquivo_instancia){
+	
+
+	string texto;
+	arquivo_instancia >> texto;
+	
+	id = new int[qtd_veiculos];
+	rota = new vector<int>[qtd_veiculos];
+	arquivo_instancia >> qtd_veiculos;
+	
+	arquivo_instancia >> texto;
+	
 }
